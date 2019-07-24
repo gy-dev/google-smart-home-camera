@@ -1,4 +1,4 @@
-##Deploy to Firebase
+# Deploy to Firebase
 Navigate to the *functions* folder inside of *smart-camera* and run npm install.
 ```bash
 cd functions
