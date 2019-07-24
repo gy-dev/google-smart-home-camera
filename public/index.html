@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id"
+        content="316218850364-9knr4fllstp3irpmdufp85l94b0pecu6.apps.googleusercontent.com">
+    <title>Smart Camera View</title>
+    <style>
+        body {
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        
+        <img src="logo.png" style="max-width: 90%;height: auto;">
+        <h2 class="header-title">Sign in with your Google account</h2>
+        <div style="margin:0 auto;width:15rem;height:4rem;">
+            <div id="btn" class="g-signin2" data-width="15rem" data-height="4rem"></div>
+        </div>
+    </div>
+    
+    <script>
+        var project_id = 'smart-camera-d2cb8';
+        function GetRequest() {
+            var url = window.location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf('?') != -1) {
+                let str = url.substr(1);
+                let strArr = str.split('&');
+                for (let i = 0; i < strArr.length; i++) {
+                    theRequest[strArr[i].split('=')[0]] = unescape(strArr[i].split('=')[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        function onSuccess(googleUser) {
+            let email = googleUser.getBasicProfile().getEmail();
+            let request = GetRequest();
+            let href =
+                `https://us-central1-${project_id}.cloudfunctions.net/code?userName=${email}&state_str=${request.state_str}&url_str=${request.url_str}`
+            window.location.href = href;
+        }
+
+        function onFailure() {
+
+        }
+
+        function renderButton() {
+            let element = document.getElementById('btn');
+            gapi.signin2.render(element, {
+                'scope': 'profile email',
+                'width': 240,
+                'height': 50,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
+
+</html>

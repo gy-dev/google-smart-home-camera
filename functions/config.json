@@ -1,0 +1,17 @@
+{
+    "server": {
+        "protocol": "http",
+        "host": "47.88.3.135",
+        "port": 61422
+    },
+
+    "auth": {
+        "authClientId": "316218850364-9knr4fllstp3irpmdufp85l94b0pecu6.apps.googleusercontent.com",
+        "authClientSecret": "enOQfmgpDDHuJESGGCEDW2n6",
+        "authRedirectUrl": "https://smart-camera-d2cb8.firebaseapp.com"
+    },
+
+    "project": {
+        "projectId": "smart-camera-d2cb8"
+    }
+}
